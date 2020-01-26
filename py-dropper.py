@@ -17,7 +17,7 @@ img_path = args['image']
 image = cv2.imread(img_path)
 
 # Reading csv file with pandas and giving names to each column
-index = ["Color", "Color_Name", "Hex", "R", "G", "B"]
+index = ["Color_Name", "Hex", "R", "G", "B"]
 colors = pd.read_csv('colors.csv', names=index, header=None)
 
 
@@ -41,8 +41,8 @@ cv2.setMouseCallback('Py-dropper', draw_function)
 
 
 def getColorName(r, g, b):
-    ''' Takes R,G,B value of the pixel clicked on and returns the name of the color closest to it 
-    (because I couldn't find a better database of colors atm).'''
+    ''' Takes R,G,B value of the pixel clicked on and returns the name of the color closest to it.
+    (I couldn't find a better database of colors atm)'''
     min_distance = 100000
     for i in range(len(colors)):
         distance = abs(r - int(colors.loc[i, "R"])) + abs(
@@ -57,7 +57,7 @@ while True:
     cv2.imshow("Py-dropper", image)
     if CLICKED:
         # creating a rectangle to show the color name in
-        # -1 fills the rectangle
+        # -1 fills the rectangle 
         cv2.rectangle(image, (20, 20), (750, 60), (B, G, R), -1)
         # Creating string to display
         text = getColorName(R, G, B) + "  RGB:- (" + str(R) + "," + str(R) + "," + str(B)+ ")"
